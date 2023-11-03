@@ -1,10 +1,3 @@
-/*
- * Last name: Betmann
- * Given name: Vitor
- * Student number: 219199512
- * Date: Oct 31, 2023
- */
-
 import java.util.Scanner;
 
 public class Hangman {
