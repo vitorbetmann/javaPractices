@@ -7,13 +7,10 @@
 
 import java.util.Scanner;
 
-public class Question3 {
+public class Hangman {
 
 	public static void main(String[] args) {
 
-		// create a String array of words (dictionary) - you may use the commandline to
-		// pass in a set/string of words to use at run time
-		// similar to Question2
 		String[] dictionary = new String[20];
 
 		dictionary[0] = "programming";
@@ -36,24 +33,6 @@ public class Question3 {
 		dictionary[17] = "question";
 		dictionary[18] = "apple";
 		dictionary[19] = "microsoft";
-
-		// create an outer loop that asks the user if they want to play/quit
-
-		// if play is selected, the program will randomly select a word from the above
-		// dictionary (to use as the word to guess).
-
-		// run the method runHangman(String wordToGuess)
-
-		// this method should loop through asking the user to enter a character for a
-		// letter,
-		// gradually revealing the letters as they are guessed correctly, until no more
-		// letters are unknown
-		// the method should then display the number of guesses it took to guess the
-		// word, before returning to the main, where the outer
-		// loop will re-ask if the user wants to play or quit
-
-		// if quit is selected, then the program will exit (finish with a goodbye
-		// message)
 
 		System.out.print("Hello! Are you ready for some hangman?");
 		System.out.print("\nPress y (or type \"yes\" or \"YEAH!!\") to play or any other key to quit: ");
@@ -81,10 +60,7 @@ public class Question3 {
 	}
 
 	public static void runHangman(String wordToGuess) {
-		// TO COMPLETE (method to iteratively request a guess for a letter from the
-		// user, display progress and determine whether
-		// the game can end (all letters guessed & revealed). It should track how many
-		// guesses the user takes.
+		
 		char[] letters = wordToGuess.toCharArray();
 		int length = letters.length;
 
@@ -138,8 +114,8 @@ public class Question3 {
 			for (int n = 0; n < length; n++) {
 				if (guess == letters[n]) {
 					if (Character.toLowerCase(blank[n]) == letters[n]) { // this prevents a player from guessing the
-																			// same letter right multiple times and
-																			// still "win"
+												// same letter right multiple times and
+												// still "win"
 						break;
 					} else {
 						blank[n] = Character.toUpperCase(guess);
