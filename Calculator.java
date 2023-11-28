@@ -20,8 +20,7 @@ public class Calculator {
 
 		while (operator != 'q') {
 
-			if (operator != 's' && operator != 'r' && operator != '2' && operator != '!'
-					&& operator != 'i') {
+			if (operator != 's' && operator != 'r' && operator != '2' && operator != '!' && operator != 'i') {
 				System.out.print("\nPlease insert a number: ");
 				num2 = input.nextDouble();
 			}
@@ -45,8 +44,15 @@ public class Calculator {
 				System.out.println("\nThe result is: " + num1);
 				break;
 			case '%':
+				int num3 = (int) (num1 / num2);
+				System.out.print("\n(" + num1 + " is equally divisible by " + num2 + " " + num3);
+				if (num3 == 1)
+					System.out.println(" time)");
+				else
+					System.out.println(" times)");
+
 				num1 = num1 % num2;
-				System.out.println("\nThe result is: " + num1);
+				System.out.println("The result is: " + num1);
 				break;
 			case '/':
 				num1 = num1 / num2;

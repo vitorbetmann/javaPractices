@@ -11,9 +11,6 @@ public class Hangman_Game {
 
 	public static void main(String[] args) {
 
-		// create a String array of words (dictionary) - you may use the commandline to
-		// pass in a set/string of words to use at run time
-		// similar to Question2
 		String[] dictionary = new String[20];
 
 		dictionary[0] = "programming";
@@ -37,36 +34,21 @@ public class Hangman_Game {
 		dictionary[18] = "apple";
 		dictionary[19] = "microsoft";
 
-		// create an outer loop that asks the user if they want to play/quit
-
-		// if play is selected, the program will randomly select a word from the above
-		// dictionary (to use as the word to guess).
-
-		// run the method runHangman(String wordToGuess)
-
-		// this method should loop through asking the user to enter a character for a
-		// letter,
-		// gradually revealing the letters as they are guessed correctly, until no more
-		// letters are unknown
-		// the method should then display the number of guesses it took to guess the
-		// word, before returning to the main, where the outer
-		// loop will re-ask if the user wants to play or quit
-
-		// if quit is selected, then the program will exit (finish with a goodbye
-		// message)
-
+		// intro
 		System.out.print("Hello! Are you ready for some hangman?");
 		System.out.print("\nPress y (or type \"yes\" or \"YEAH!!\") to play or any other key to quit: ");
 
+		// main menu
 		Scanner input = new Scanner(System.in);
 		char reply = input.next().charAt(0);
 		reply = Character.toLowerCase(reply);
 
+		// the game
 		while (reply == 'y') {
 
 			String randomWord = dictionary[(int) Math.round(Math.random() * 19)];
 
-			//System.out.println(randomWord); // uncomment this to see the chosen word on the terminal
+			// System.out.println(randomWord); //uncomment to see the chosen word
 
 			System.out.println("\nLET'S GO! Your word has " + randomWord.length() + " letters. Good luck!");
 
@@ -81,19 +63,17 @@ public class Hangman_Game {
 	}
 
 	public static void runHangman(String wordToGuess) {
-		// TO COMPLETE (method to iteratively request a guess for a letter from the
-		// user, display progress and determine whether
-		// the game can end (all letters guessed & revealed). It should track how many
-		// guesses the user takes.
+
+		char head = 'O', body = '|', legR = '\\', legL = '/';
+
 		char[] letters = wordToGuess.toCharArray();
 		int length = letters.length;
 
 		char[] blank = new char[length];
-
 		for (int i = 0; i < length; i++) {
 			blank[i] = '_';
 		}
-
+		int wrongCount = 0;
 		int count = 0; // amount of attempts
 		int completion = 0; // how much of the word has been guessed
 		String alreadyGuessed = ""; // list of guessed letters
@@ -121,13 +101,13 @@ public class Hangman_Game {
 			Scanner input = new Scanner(System.in);
 
 			String guessS = input.next(); // StdIn was giving me trouble, so I switched to Scanner
-			
+
 			while (guessS.length() != 1) {
 				System.out.println();
 				System.out.print("Oh! Someone's in a rush.\nPlease insert only 1 character: ");
 				guessS = input.next();
 			}
-			
+
 			char guess = guessS.charAt(0);
 			guess = Character.toLowerCase(guess);
 			// System.out.println("_________________");
@@ -162,21 +142,50 @@ public class Hangman_Game {
 
 			if (isHit)
 				System.out.println("\nHooray!! You guessed right!\n");
-			if (!isHit && !sameGuess)
+			if (!isHit && !sameGuess) {
 				System.out.println("\nOops, that's not it! Try again.\n");
+				wrongCount++;
+			}
 
+			//print hung person
+			if (wrongCount >= 1) {
+				System.out.println("  |");
+				System.out.println(" " + head + "|");
+			}
+			if (wrongCount >= 2)
+				System.out.print(legL);
+			if (wrongCount >= 3)
+				System.out.print(body);
+			if (wrongCount >= 4)
+				System.out.println(legR);
+			if (wrongCount >= 5)
+				System.out.print(legL);
+			if (wrongCount == 6)
+				System.out.print(" " + legR);
+			System.out.println("\n");
+			
+			//check for endgame condition
+			if (wrongCount == 6)
+				break;
 			if (completion == length)
 				break;
 		}
 
-		System.out.println();
-		System.out.print("The word is:  ");
+		if (wrongCount == 6) {
+			System.out.println("Oh, no! They hung you!");
+			System.out.print("You got this far: ");
+			
+		} else {
+			System.out.println();
+			System.out.println("CONGRATULATIONS!! YOU BEAT THE GAME IN " + count + " TRIES!");
+			System.out.print("The word is: ");
+
+		}
+		
 		for (int i = 0; i < length; i++) {
 			System.out.print(blank[i] + " ");
 		}
 		System.out.println("\n");
-
-		System.out.println("CONGRATULATIONS!! YOU BEAT THE GAME IN " + count + " TRIES!\n");
 
 	}
 }
