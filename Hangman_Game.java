@@ -1,10 +1,3 @@
-/*
- * Last name: Betmann
- * Given name: Vitor
- * Student number: 219199512
- * Date: Oct 31, 2023
- */
-
 import java.util.Scanner;
 
 public class Hangman_Game {
@@ -118,8 +111,8 @@ public class Hangman_Game {
 			for (int n = 0; n < length; n++) {
 				if (guess == letters[n]) {
 					if (Character.toLowerCase(blank[n]) == letters[n]) { // this prevents a player from guessing the
-																			// same letter right multiple times and
-																			// still "win"
+											// same letter right multiple times and
+											// still "win"
 						break;
 					} else {
 						blank[n] = Character.toUpperCase(guess);
